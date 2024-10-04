@@ -1,0 +1,29 @@
+package com.example.texttovoice;
+
+import android.app.Activity; 
+import android.os.Bundle; 
+import android.speech.tts.TextToSpeech; 
+import android.view.View; 
+import android.widget.EditText; 
+
+public class MainActivity extends Activity {
+    TextToSpeech tts; 
+    EditText inputText; 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState); 
+        setContentView(R.layout.activity_main); 
+        inputText = findViewById(R.id.inputText); 
+        tts = new TextToSpeech(this, status -> findViewById(R.id.speakButton).setOnClickListener(v -> tts.speak(inputText.getText().toString(), TextToSpeech.QUEUE_FLUSH, null, null)));
+    }
+}
+
+-------------------------------------------------
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+    <EditText android:id="@+id/inputText" android:hint="Enter text" />
+    <Button android:id="@+id/speakButton" android:text="Speak" />
+</LinearLayout>
